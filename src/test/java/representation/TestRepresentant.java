@@ -25,7 +25,6 @@ public class TestRepresentant {
 	
 	@Test
 	public void testSalaireMensuel() {
-            r.CAParDefaut(0);
 		float CA = 50000f;
 		float POURCENTAGE= 0.1f; // 10% de pourcentage sur CA
 		// On enregistre un CA pour le mois 0 (janvier)
@@ -51,7 +50,7 @@ public class TestRepresentant {
 		
 		// On n'enregistre aucun CA
 		//r.enregistrerCA(0, 10000f);
-		r.CAParDefaut(0);
+
 		// On calcule son salaire pour le mois 0 avec 10% de part sur CA
 		float salaire = r.salaireMensuel(0, POURCENTAGE);
 		
