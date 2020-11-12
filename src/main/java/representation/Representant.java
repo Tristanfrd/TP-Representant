@@ -7,11 +7,14 @@ public class Representant {
 	private final String prenom;
 	private String adresse;
 	private float salaireFixe;
+        private ZoneGeographique secteur;
+        private float[] CA;
 
 	public Representant(int numero, String nom, String prenom, ZoneGeographique secteur) {
 		this.numero = numero;
 		this.nom = nom;
 		this.prenom = prenom;
+                this.secteur = secteur;
 	}
 
 	public int getNumero() {
@@ -43,14 +46,16 @@ public class Representant {
 	}
 
 	public ZoneGeographique getSecteur() {
-		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+            return secteur;
 	}
 
 	public void setSecteur(ZoneGeographique secteur) {
-		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
+            this.secteur = secteur;
 	}
+        
+        public float CAParDefaut(int mois){
+            return CA[mois]=0f;
+        }
 
 	/**
 	 * Enregistre le CA de ce représentant pour un mois donné. 
@@ -59,15 +64,17 @@ public class Representant {
 	 **/
 	public void enregistrerCA(int mois, float montant) {
 		// vérifier les paramètres
+                
 		if (mois < 0 || mois > 11) {
 			throw new IllegalArgumentException("Le mois doit être compris entre 0 et 11");
 		}
 		if (montant < 0) {
-			throw new IllegalArgumentException("Le montant doit être positif ou null");
+			throw new IllegalArgumentException("Le montant doit être positif ou nul");
 		}
-		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
-	}
+                CA[mois] = montant;
+                System.out.println("Le CA du mois de "+mois+" est de "+montant);
+        }
+    	
 
 	/**
 	 * Calcule le salaire mensuel de ce répresentant pour un mois donné
@@ -76,9 +83,15 @@ public class Representant {
 	 * @return le salaire pour ce mois, tenant compte du salaire fixe, de l'indemnité repas, et du pourcentage sur CA
 	 */
 	public float salaireMensuel(int mois, float pourcentage) {
-		// TODO: Implémenter cette méthode
-		throw new UnsupportedOperationException("Pas encore implémenté");
-	}
+            if (mois < 0 || mois > 11) {
+			throw new IllegalArgumentException("Le mois doit être compris entre 0 et 11");
+		}
+                if (pourcentage <0){
+			throw new IllegalArgumentException("Le pourcentage doit être posiif ou nul");                    
+                }
+            float salaire = this.salaireFixe + pourcentage*CA[mois] + secteur.getIndemniteRepas(); 
+            return salaire;
+        }
 
 	@Override
 	public String toString() {
