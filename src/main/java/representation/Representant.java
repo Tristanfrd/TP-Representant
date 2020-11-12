@@ -8,7 +8,7 @@ public class Representant {
 	private String adresse;
 	private float salaireFixe;
         private ZoneGeographique secteur;
-        private float[] CA;
+        private float[] CA = {0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f,0f};
 
 	public Representant(int numero, String nom, String prenom, ZoneGeographique secteur) {
 		this.numero = numero;
@@ -53,8 +53,8 @@ public class Representant {
             this.secteur = secteur;
 	}
         
-        public float CAParDefaut(int mois){
-            return CA[mois]=0f;
+        public void CAParDefaut(int mois){
+            CA[mois]=0;
         }
 
 	/**
